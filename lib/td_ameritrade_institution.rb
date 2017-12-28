@@ -2,6 +2,9 @@ require "httparty"
 require "nokogiri"
 
 require "td_ameritrade_institution/version"
+require "td_ameritrade_institution/requests/base"
+require "td_ameritrade_institution/requests/account_number"
+require "td_ameritrade_institution/client"
 
 module TDAmeritradeInstitution
   class << self
@@ -14,8 +17,6 @@ module TDAmeritradeInstitution
   end
 
   class Configuration
-    attr_accessor :oauth_token
-    attr_accessor :refresh_token
     attr_accessor :api_url
     attr_accessor :token_url
     attr_accessor :client_id
