@@ -1,17 +1,19 @@
 module TDAmeritradeInstitution
   class Client
-    include HTTParty
+    include Authentication
 
     attr_reader :config
 
-    def initialize
+    def initialize(options = {})
       @config = TDAmeritradeInstitution.config
+      raise TDAmeritradeInstitution::ConfigurationError.new "Configuration required." if @config.nil?
+      @options = options
     end
 
     def account_number(params)
       request_params = Requests::AccountNumber.build(params)
       # What kind of request TD?
-      get(build_path('InstitutionalAPIv2/api/prospective-accounts/account-id.xml'), request_params)
+      HTTParty.get(build_path('prospective-accounts/account-id.xml'), request_params)
     end
 
     private

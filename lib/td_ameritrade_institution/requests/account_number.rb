@@ -9,7 +9,7 @@ module TDAmeritradeInstitution
 
       def build_request
         {
-          headers: build_headers
+          headers: build_headers,
           body: build_xml
         }
       end
