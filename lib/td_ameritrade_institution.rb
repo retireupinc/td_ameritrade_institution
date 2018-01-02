@@ -28,7 +28,7 @@ module TDAmeritradeInstitution
 
     def initialize
       # Actual endpoints would be helpful TD
-      @token_url = 'http://inst-apig-npe-ste6.iteclientsys.local/v1/oauth2/token'
+      @token_url = 'https://api.tdameritrade.com/v1/oauth2/token'
       @api_url = 'http://XXXX:XXXX/InstitutionalAPIv2/api/'
     end
   end

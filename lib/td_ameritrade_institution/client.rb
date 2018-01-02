@@ -11,15 +11,24 @@ module TDAmeritradeInstitution
     end
 
     def account_number(params)
-      request_params = Requests::AccountNumber.build(params)
+      request_body = Requests::AccountNumber.build(params)
       # What kind of request TD?
-      HTTParty.get(build_path('prospective-accounts/account-id.xml'), request_params)
+      HTTParty.get(build_path('prospective-accounts/account-id.xml'), {
+        headers: build_request_header,
+        body: request_body
+      })
     end
 
     private
 
     def build_path(resource)
       "#{config.api_url}#{resource}"
+    end
+
+    def build_request_header
+      {
+        'Authorization' => "Bearer #{@options[:oauth_token]}"
+      }
     end
   end
 end

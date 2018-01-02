@@ -4,10 +4,6 @@ module TDAmeritradeInstitution
       def self.build(params = {})
         new(params).build_request
       end
-
-      def build_headers
-        {}
-      end
     end
   end
 end
