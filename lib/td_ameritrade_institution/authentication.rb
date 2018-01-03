@@ -24,9 +24,6 @@ module TDAmeritradeInstitution
       else
         raise ArgumentError.new "Missing credentials"
       end
-
-      puts response
-      yield @options[:veo_user], @options[:veo_pass] if block_given?
     end
 
     private
@@ -40,8 +37,9 @@ module TDAmeritradeInstitution
     end
 
     def build_auth_headers
+      encoded_auth = Base64.encode64("#{config.client_id}:#{config.client_secret}")
       {
-        'Authorization' => "Basic #{config.client_id}:#{config.client_secret}"
+        'Authorization' => "Basic #{encoded_auth}"
       }
     end
   end
