@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api:createAccountRequest xmlns:api="urn:endpoints.api.inst.tda.com/AccountOpening" >
+  <api:createdBy><%= created_by %></api:createdBy>
+  <api:primaryHomeAddress>
+    <api:addressLine1><%= address.address_line_1 %></api:addressLine1>
+    <api:addressLine2><%= address.address_line_2 %></api:addressLine2>
+    <api:stateCode><%= address.state_code %></api:stateCode>
+    <api:city><%= address.city %></api:city>
+    <api:zip><%= address.zip %></api:zip>
+    <api:province></api:province>
+    <api:country><%= address.country_code %></api:country>
+  </api:primaryHomeAddress>
+  <api:accounts>
+    <% accounts.each do |account| %>
+      <api:individualAccount>
+        <api:accountReferenceId></api:accountReferenceId>
+        <api:repCode><%= account.rep_code %></api:repCode>
+        <api:accountNumber><%= account.account_number %></api:accountNumber>
+        <api:primaryOwner>
+          <api:firstName><%= account.primary_owner.first_name %></api:firstName>
+          <api:middleName></api:middleName>
+          <api:lastName><%= account.primary_owner.last_name %></api:lastName>
+          <api:birthDate><%= account.primary_owner.birth_date %></api:birthDate>
+          <api:primaryPhone>
+            <api:number><%= account.primary_owner.phone.number %></api:number>
+            <api:extension><%= account.primary_owner.phone.extension %></api:extension>
+            <api:isNonUS><%= account.primary_owner.phone.is_non_us %></api:isNonUS>
+          </api:primaryPhone>
+          <api:email><%= account.primary_owner.email %></api:email>
+          <api:mailingAddress>
+              <api:addressLine1></api:addressLine1>
+              <api:addressLine2></api:addressLine2>
+              <api:stateCode></api:stateCode>
+              <api:city></api:city>
+              <api:zip></api:zip>
+              <api:province></api:province>
+              <api:country></api:country>
+          </api:mailingAddress>
+        </api:primaryOwner>
+        <api:confirmAndStatementPrefs>
+          <api:accountStatements><%= account.account_statements_preference %></api:accountStatements>
+          <api:tradeConfirmations><%= account.trade_confirmations_preference %></api:tradeConfirmations>
+          <api:ieca><%= account.ieca_preference %></api:ieca>
+        </api:confirmAndStatementPrefs>
+        <api:cashSweepOption><%= account.cash_sweep_option %></api:cashSweepOption>
+      </api:individualAccount>
+    <% end %>
+  </api:accounts>
+</api:createAccountRequest>

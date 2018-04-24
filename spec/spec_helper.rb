@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "td_ameritrade_institution"
+require 'webmock/rspec'
+require 'ffaker'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

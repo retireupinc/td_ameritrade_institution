@@ -1,0 +1,5 @@
+require_relative "models/base"
+require_relative "models/address"
+require_relative "models/phone"
+require_relative "models/owner"
+require_relative "models/account"
