@@ -34,12 +34,13 @@ module TDAmeritradeInstitution
       build_token(response.body)
     end
 
-    def refresh_token!(refresh_token:)
+    def refresh_token!(refresh_token:, access_type: nil)
       response = post(
         url: config.token_url,
         body: {
-          grant_type: 'refresh',
-          refresh_token: refresh_token
+          grant_type: 'refresh_token',
+          refresh_token: refresh_token,
+          access_type: access_type
         },
         headers: build_auth_headers
       )

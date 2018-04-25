@@ -47,8 +47,9 @@ RSpec.describe TDAmeritradeInstitution::Authentication do
     let(:refresh_token) { "a refresh_token" }
     let(:request_body) {
       {
-        grant_type: 'refresh',
-        refresh_token: refresh_token
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token,
+        access_type: nil
       }
     }
     it "returns a token" do
