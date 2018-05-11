@@ -1,34 +1,21 @@
+require "td_ameritrade_institution/requests/account_numbers/create"
+require "td_ameritrade_institution/requests/accounts/create"
+
 module TDAmeritradeInstitution
   class Client
-    include Authentication
 
-    attr_reader :config
+    attr_reader :access_token
 
-    def initialize(options = {})
-      @config = TDAmeritradeInstitution.config
-      raise TDAmeritradeInstitution::ConfigurationError.new "Configuration required." if @config.nil?
-      @options = options
+    def initialize(access_token:)
+      @access_token = access_token
     end
 
     def account_number(params)
-      request_body = Requests::AccountNumber.build(params)
-      # What kind of request TD?
-      HTTParty.get(build_path('prospective-accounts/account-id.xml'), {
-        headers: build_request_header,
-        body: request_body
-      })
+      Requests::AccountNumbers::Create.new(access_token: access_token, **params).call
     end
 
-    private
-
-    def build_path(resource)
-      "#{config.api_url}#{resource}"
-    end
-
-    def build_request_header
-      {
-        'Authorization' => "Bearer #{@options[:oauth_token]}"
-      }
+    def create_account(params)
+      Requests::Accounts::Create.new(access_token: access_token, **params).call
     end
   end
 end
